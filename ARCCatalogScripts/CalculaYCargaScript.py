@@ -32,7 +32,9 @@ def CalculaYCargaScript(CAD, NombreCAD, NumeroDeControl, ConexionGDB):
     ##ConexionGDB = "c:\\ManejoCAD\\scratch\\Conexion_GDB.sde"
 
     base = "Conexion_GDB.sde"
-    tempUrl = os.path.join(ConexionGDB,"scratch",base)
+    ##Omit the scratch, it came with the url I input
+    
+    tempUrl = os.path.join(ConexionGDB,base)
     ConexionGDB = tempUrl
     print (ConexionGDB)
     arcpy.AddMessage(ConexionGDB)
@@ -179,7 +181,7 @@ def CalculaYCargaScript(CAD, NombreCAD, NumeroDeControl, ConexionGDB):
         TemporalEnvironment1 = arcpy.env.scratchWorkspace
         ##arcpy.env.scratchWorkspace = "C:\\ManejoCAD\\scratch\\Conexion_GDB.sde"
         arcpy.env.scratchWorkspace = os.path.join(arcpy.env.scratchFolder, "Conexion_GDB.sde")
-        arcpy.Append_management(polygono, CDPRGisAdminLineasCAD, "NO_TEST","Num_Control \"Núm. de Control\" true false false 10 Text 0 0 ,First,#,\\Polygon,Num_Control,-1,-1;Nombre_CAD \"Nombre de CAD\" true false false 50 Text 0 0 ,First,#,\\Polygon,Nombre_CAD,-1,-1;Fecha_Creado \"Fecha_Creado\" false true false 36 Date 0 0 ,First,#;SHAPE.STArea() \"SHAPE.STArea()\" false false true 0 Double 0 0 ,First,#;SHAPE.STLength() \"SHAPE.STLength()\" false false true 0 Double 0 0 ,First,#", "")
+        arcpy.Append_management(polygono, CDPRGisAdminPoligonosCAD, "NO_TEST","Num_Control \"Núm. de Control\" true false false 10 Text 0 0 ,First,#,\\Polygon,Num_Control,-1,-1;Nombre_CAD \"Nombre de CAD\" true false false 50 Text 0 0 ,First,#,\\Polygon,Nombre_CAD,-1,-1;Fecha_Creado \"Fecha_Creado\" false true false 36 Date 0 0 ,First,#;SHAPE.STArea() \"SHAPE.STArea()\" false false true 0 Double 0 0 ,First,#;SHAPE.STLength() \"SHAPE.STLength()\" false false true 0 Double 0 0 ,First,#", "")
         arcpy.env.scratchWorkspace = TemporalEnvironment1
         arcpy.TruncateTable_management(polygono)
         print("polygon completed")
